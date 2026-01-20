@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <title>Вхід</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="auth-box">
+  <h2>Вхід</h2>
+
+  <input id="loginUser" placeholder="Логін">
+  <input id="loginPass" type="password" placeholder="Пароль">
+
+  <button onclick="login()">Увійти</button>
+
+  <p>Немає акаунта? <a href="register.html">Реєстрація</a></p>
+</div>
+
+<script>
+function login(){
+  fetch("../backend/login.php",{
+    method:"POST",
+    headers:{"Content-Type":"application/json"},
+    body:JSON.stringify({
+      username:loginUser.value,
+      password:loginPass.value
+    })
+  })
+  .then(r=>r.json())
+  .then(d=>{
+    if(d.status=="ok"){
+      location.href="index.html";
+    } else {
+      alert("Невірний логін або пароль");
+    }
+  });
+}
+</script>
+
+</body>
+</html>

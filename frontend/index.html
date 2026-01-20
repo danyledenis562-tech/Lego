@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <title>LEGO Магазин</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <h1>🧱 LEGO Store</h1>
+  <div>
+    <input id="searchInput" oninput="searchProducts()" placeholder="Пошук LEGO...">
+    <button onclick="logout()">Вийти</button>
+  </div>
+</header>
+
+<section class="filters">
+  <button onclick="renderProducts(products)">Усі</button>
+  <button onclick="filterByPrice(0,50)">До 50$</button>
+  <button onclick="filterByPrice(50,100)">50–100$</button>
+  <button onclick="filterByPrice(100,300)">100+$</button>
+</section>
+
+<main>
+  <div id="products" class="products"></div>
+
+  <aside class="cart">
+    <h2>🛒 Кошик</h2>
+    <ul id="cart"></ul>
+    <p>Сума: <span id="total">0</span> $</p>
+    <button onclick="pay()">Оплатити</button>
+  </aside>
+</main>
+
+<footer>
+  <p>© 2026 LEGO Store | Demo Project</p>
+</footer>
+
+<script src="app.js"></script>
+
+</body>
+</html>
+
+<script>
+fetch("../backend/me.php")
+  .then(r=>r.json())
+  .then(user=>{
+    if(!user){
+      location.href="login.html";
+    }
+  });
+</script>

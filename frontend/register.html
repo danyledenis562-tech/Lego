@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <title>Реєстрація</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="auth-box">
+  <h2>Реєстрація</h2>
+
+  <input id="regUser" placeholder="Логін">
+  <input id="regPass" type="password" placeholder="Пароль">
+
+  <button onclick="register()">Створити акаунт</button>
+
+  <p>Є акаунт? <a href="login.html">Вхід</a></p>
+</div>
+
+<script>
+function register(){
+  fetch("../backend/register.php",{
+    method:"POST",
+    headers:{"Content-Type":"application/json"},
+    body:JSON.stringify({
+      username:regUser.value,
+      password:regPass.value
+    })
+  })
+  .then(r=>r.json())
+  .then(d=>{
+    if(d.status=="ok"){
+      alert("Акаунт створено!");
+      location.href="login.html";
+    } else {
+      alert(d.message);
+    }
+  });
+}
+</script>
+
+</body>
+</html>
